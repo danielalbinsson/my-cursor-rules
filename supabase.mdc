@@ -1,0 +1,63 @@
+---
+description: 
+globs: 
+alwaysApply: false
+---
+---
+description: Supabase rules
+globs: **/*.ts,**/*.sql
+alwaysApply: false
+---
+# Supabase rules
+
+## Edge Functions
+- Use Web APIs and Deno's core APIs instead of external dependencies
+- Place shared utilities in `supabase/functions/_shared`
+- Use proper import specifiers:
+  ```typescript
+  // ✅ Good
+  import { createClient } from "pnpm:@supabase/supabase-js@2.39.0";
+  
+  // ❌ Bad
+  import { createClient } from "@supabase/supabase-js";
+  ```
+
+## Database Operations
+- Write explicit database migrations:
+  ```sql
+  -- Example migration
+  create table public.todos (
+    id uuid default gen_random_uuid() primary key,
+    title text not null,
+    completed boolean default false,
+    user_id uuid references auth.users(id)
+  );
+  ```
+
+- Implement Row Level Security (RLS) policies:
+  ```sql
+  -- Enable RLS
+  alter table todos enable row level security;
+  
+  -- Create policy
+  create policy "Users can only access their own todos"
+    on todos for all
+    using (auth.uid() = user_id);
+  ```
+
+- Use database functions for complex operations:
+  ```sql
+  create or replace function get_user_todos(
+    user_id uuid
+  ) returns setof todos as $$
+    select * from todos
+    where todos.user_id = $1;
+  $$ language sql security definer;
+  ```
+
+## Best Practices
+- Always use TypeScript for type safety
+- Implement proper error handling in Edge Functions
+- Use environment variables for sensitive data
+- Follow the principle of least privilege for database access
+- Write comprehensive database tests
