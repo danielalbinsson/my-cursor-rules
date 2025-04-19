@@ -1,11 +1,11 @@
 ---
 description: 
 globs: 
-alwaysApply: false
+alwaysApply: true
 ---
 ---
 description: Page structure
-globs: 
+globs: **/*.ts, **/*.tsx
 alwaysApply: false
 ---
 # Page Structure

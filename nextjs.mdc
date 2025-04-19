@@ -1,19 +1,24 @@
 ---
 description: Next.js
-globs: **/*.js,**/*.jsx,**/*.ts,**/*.tsx
+globs: **/*.ts,**/*.tsx
 alwaysApply: false
 ---
 ---
-description: Rules for Next JS
-globs: **/*.js,**/*.ts
+description: General rules for Next.js 14 development, including using the app directory, server components, and modern TypeScript syntax.
+globs: **/*.ts,
 alwaysApply: false
 ---
 
 # Next.js rules
 
+- Use Next.js 14
 - Use the App Router structure with `page.tsx` files in route directories.
 - Client components must be explicitly marked with `'use client'` at the top of the file.
+- Ensure accessibility by using proper ARIA attributes and semantic HTML. 
 - Use kebab-case for directory names (e.g., `components/auth-form`) and PascalCase for component files.
+- For backend calls use Next JS API Routes
+- Follow responsive design principles: Utilize Tailwind CSS classes to ensure responsiveness across various screen sizes.
+- Utilize route handlers (route.ts) for API routes in the App Router.
 - Prefer named exports over default exports, i.e. `export function Button() { /* ... */ }` instead of `export default function Button() { /* ... */ }`.
 - Minimize `'use client'` directives:
   - Keep most components as React Server Components (RSC)

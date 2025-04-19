@@ -1,15 +1,16 @@
 ---
 description: 
 globs: 
-alwaysApply: false
+alwaysApply: true
 ---
 ---
 description: Tailwind CSS rules
-globs: *
+globs: 
 alwaysApply: false
 ---
 # Tailwind CSS rules
 
+- Use Tailwind CSS version 3
 - Use responsive prefixes for mobile-first design:
 
 ```html
